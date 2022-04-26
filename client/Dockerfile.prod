@@ -12,6 +12,7 @@ COPY --chown=${appUsr}:${appGrp} package*.json ./
 RUN npm install
 
 RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+RUN mkdir -p build && chmod -R 777 build
 
 COPY --chown=${appUsr}:${appGrp} . . 
 
