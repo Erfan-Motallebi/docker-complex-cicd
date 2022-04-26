@@ -1,0 +1,20 @@
+FROM node:18-alpine3.14 AS nodeEnv
+
+ARG appGrp=devGrp
+ARG appUsr=devUsr
+
+RUN addgroup ${appGrp} && adduser -S ${appUsr} -G ${appGrp}
+
+WORKDIR /app/client
+
+COPY --chown=${appUsr}:${appGrp} package*.json ./
+
+RUN npm install
+
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+
+COPY --chown=${appUsr}:${appGrp} . . 
+
+USER ${appUsr}
+
+CMD ["npm", "run", "start"]
