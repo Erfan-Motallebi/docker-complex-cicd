@@ -15,7 +15,7 @@ after_success:
   - docker build --tag erfanrider/nginx -f ./nginx/Dockerfile.prod ./nginx
 
   ### Docker Login to push the images to the hub
-  - docker login --username ${DOCKER_ID} --password ${DOCKER_PASS}
+  - docker login --username "$DOCKER_ID" --password "$DOCKER_PASS"
 
   ### Start to push the images
   - docker push erfanrider/client
