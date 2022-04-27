@@ -29,7 +29,7 @@ deploy:
   app: Multi-containers
   env: Multicontainers-env
   bucket_name: elasticbeanstalk-eu-central-1-125452481565
-  bucket_path: multi-docker
+  bucket_path: multi-docker-v2
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   on:
