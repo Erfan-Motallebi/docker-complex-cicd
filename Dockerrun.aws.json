@@ -9,7 +9,7 @@
     },
     {
       "name": "server",
-      "nmage": "erfanrider/server",
+      "image": "erfanrider/server",
       "hostname": "api",
       "essential": false
     },
