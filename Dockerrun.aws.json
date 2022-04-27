@@ -1,0 +1,37 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "Name": "react-client",
+      "Image": "erfanrider/client",
+      "Hostname": "client",
+      "Essential": false
+    },
+    {
+      "Name": "node-server",
+      "Image": "erfanrider/server",
+      "Hostname": "api",
+      "Essential": false
+    },
+    {
+      "Name": "node-worker",
+      "Image": "erfanrider/worker",
+      "Hostname": "worker",
+      "Essential": false
+    },
+    {
+      "Name": "nginx-router",
+      "Image": "erfanrider/nginx",
+      "Hostname": "nginx",
+      "Essential": true,
+      "PortMappings": {
+        "hostPort": 80,
+        "containerPort": 80
+      },
+      "links": [
+        "react-client",
+        "node-server"
+      ]
+    }
+  ]
+}

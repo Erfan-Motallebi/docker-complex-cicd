@@ -22,3 +22,15 @@ after_success:
   - docker push erfanrider/api
   - docker push erfanrider/worker
   - docker push erfanrider/nginx
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: "$ACCESS_KEY_ID"
+  secret_access_key:
+    secure: "$SECRET_ACCESS_KEY"
+  region: "eu-central-1"
+  app: Multi-containers
+  env: Multicontainers-env
+  bucket: elasticbeanstalk-eu-central-1-125452481565
+  on:
+    branch: master
