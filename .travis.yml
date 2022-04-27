@@ -25,13 +25,13 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id: "$ACCESS_KEY_ID"
-  secret_access_key:
-    secure: "$SECRET_ACCESS_KEY"
-  region: "eu-central-1"
+  region: eu-central-1
   app: Multi-containers
   env: Multicontainers-env
   bucket_name: elasticbeanstalk-eu-central-1-125452481565
   bucket_path: multi-docker
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key:
+    secure: $SECRET_ACCESS_KEY
   on:
     branch: master
