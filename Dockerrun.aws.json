@@ -24,10 +24,12 @@
       "image": "erfanrider/nginx",
       "hostname": "nginx",
       "essential": true,
-      "portMappings": {
-        "hostPort": 80,
-        "containerPort": 80
-      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
       "links": [
         "client",
         "server"
