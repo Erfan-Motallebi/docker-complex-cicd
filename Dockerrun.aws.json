@@ -2,29 +2,29 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "Name": "client",
-      "Image": "erfanrider/client",
-      "Hostname": "client",
-      "Essential": false
+      "name": "client",
+      "image": "erfanrider/client",
+      "hostname": "client",
+      "essential": false
     },
     {
-      "Name": "server",
-      "Image": "erfanrider/server",
-      "Hostname": "api",
-      "Essential": false
+      "name": "server",
+      "nmage": "erfanrider/server",
+      "hostname": "api",
+      "essential": false
     },
     {
-      "Name": "worker",
-      "Image": "erfanrider/worker",
-      "Hostname": "worker",
-      "Essential": false
+      "name": "worker",
+      "image": "erfanrider/worker",
+      "hostname": "worker",
+      "essential": false
     },
     {
-      "Name": "nginx",
-      "Image": "erfanrider/nginx",
-      "Hostname": "nginx",
-      "Essential": true,
-      "PortMappings": {
+      "name": "nginx",
+      "image": "erfanrider/nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": {
         "hostPort": 80,
         "containerPort": 80
       },
