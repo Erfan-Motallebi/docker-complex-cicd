@@ -1,12 +1,14 @@
-import React from "react";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import OtherPage from "./OtherPage";
 import Fib from "./Fib";
+import OtherPage from "./OtherPage";
 
 function App() {
   return (
     <div>
+      <header>
+        <h2>Fib Calculator</h2>
+      </header>
       <Router>
         <Link to="/">Home</Link>
         <br />
