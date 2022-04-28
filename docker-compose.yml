@@ -2,11 +2,6 @@ version: '3.8'
 services:
   nginx:
     # container_name: nginx-container
-    depends_on:
-      api: 
-        condition: service_started
-      client: 
-        condition: service_started
     image: erfanrider/nginx
     hostname: nginx  
     deploy:
