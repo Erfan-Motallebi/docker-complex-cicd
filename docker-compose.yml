@@ -1,61 +1,51 @@
 version: '3.8'
 services:
-  postgres:
-    image: postgres:latest
-    # container_name: postgres-container
-    environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_USER=${POSTGRES_USER}
-  redis:
-    # container_name: redis-container
-    image: redis:latest
   nginx:
     # container_name: nginx-container
     depends_on:
-      - api
-      - client
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile.dev
-    restart: always  
+      api: 
+        condition: service_started
+      client: 
+        condition: service_started
+    image: erfanrider/nginx
+    hostname: nginx  
+    deploy:
+      resources:
+        limits:
+          memory: 128mb
     ports:
-      - 3500:80
-  api:
+      - 80:80
+  server:
     # container_name: api-container
-    depends_on:
-      - postgres
-      - redis
-    build:
-      context: ./server
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/server/node_modules
-      - ./server:/app/server
+    image: erfanrider/api
     environment:
-      - REDIS_HOST=redis
-      - PGHOST=postgres
-      - REDIS_PORT=6379
-      - PGDATABASE=postgres
-      - PGUSER=${POSTGRES_USER}
-      - PGPASSWORD=${POSTGRES_PASSWORD}
-      - PGPORT=5432
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - PGHOST=$PGHOST
+      - PGDATABASE=$PGDATABASE
+      - PGUSER=$PGUSER
+      - PGPASSWORD=$PGPASSWORD
+      - PGPORT=$PGPORT
+    hostname: api
+    deploy:
+      resources:
+        limits:
+          memory: 128mb
   client:
     # container_name: client-container
-    build: 
-      context: ./client
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/client/node_modules
-      - ./client:/app/client
+    image: erfanrider/client
+    hostname: client
+    deploy:
+      resources:
+        limits:
+          memory: 128mb
   worker:
     # container_name: worker-container
-    depends_on: 
-      - redis
-    build: 
-      context: ./worker
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /app/worker/node_modules
-      - ./worker:/app/worker
+    image: erfanrider/worker
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=$REDIS_HOST
+    hostname: worker
+    deploy:
+      resources:
+        limits:
+          memory: 128mb
